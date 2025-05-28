@@ -69,7 +69,8 @@ const MintPage = ({ isWalletConnected }: MintPageProps) => {
       //   method: 'POST',
       //   body: formDataToSend
       // });
-      const response = await fetch(`${import.meta.env.API_BASE_URL}/mint`, {
+      console.log("API_BASE_URL : ", import.meta.env.VITE_API_BASE_URL)
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/mint`, {
         method: 'POST',
         body: formDataToSend
       });
