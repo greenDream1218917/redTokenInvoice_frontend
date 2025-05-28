@@ -3,6 +3,7 @@ Follow the steps below to set up and run the project locally.
 
 ✅ Step 1: Install Dependencies
 Install all required packages:
+
 npm install
 
 🔗 Step 2: Set Up Hedera Testnet Access
