@@ -1,12 +1,8 @@
-Getting Started
+Getting Started\n
 Follow the steps below to set up the project and test transactions on the Hedera test network.
 
 Step 1: Install Dependencies
 Install all required Node.js packages using:
-
-bash
-Copy
-Edit
 npm install
 Step 2: Fund Your Hedera Testnet Account
 To interact with the Hedera test network, you need to have test HBAR tokens in your account.
