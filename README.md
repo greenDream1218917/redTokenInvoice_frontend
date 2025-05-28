@@ -1,4 +1,4 @@
-Getting Started\n
+Getting Started<br>
 Follow the steps below to set up the project and test transactions on the Hedera test network.
 
 Step 1: Install Dependencies
