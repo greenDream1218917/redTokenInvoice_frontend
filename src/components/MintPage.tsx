@@ -65,11 +65,14 @@ const MintPage = ({ isWalletConnected }: MintPageProps) => {
       formDataToSend.append('paytoken', formData.paytoken);
       formDataToSend.append('file', selectedFile);
 
-      const response = await fetch('http://localhost:8000/mint', {
+      // const response = await fetch('http://localhost:8000/mint', {
+      //   method: 'POST',
+      //   body: formDataToSend
+      // });
+      const response = await fetch(`${import.meta.env.API_BASE_URL}/mint`, {
         method: 'POST',
         body: formDataToSend
       });
-
       const data = await response.json();
       if (!response.ok) {
         alert('Upload failed: ' + data.details);
