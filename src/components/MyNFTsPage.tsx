@@ -61,7 +61,7 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
           const tokenURI = await contract.tokenURI(tokenId);
           const response = await fetch(tokenURI);
           const metadata = await response.json();
-          alert(metadata.image);
+          // alert(metadata.image);
           nftList.push({
             tokenId: tokenId.toString(),
             name: metadata.name || `NFT #${tokenId}`,
@@ -205,7 +205,7 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
                 <iframe
                   src={viewingNFT.image}
                   title="PDF Viewer"
-                  className="w-full h-full border rounded"
+                  className="w-full h-[70vh] border rounded"
                 />
               ) : (
                 <img

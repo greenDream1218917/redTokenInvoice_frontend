@@ -10,19 +10,12 @@ import NotFound from "./pages/NotFound";
 
 import '@rainbow-me/rainbowkit/styles.css';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 const App = () => (
   <WagmiProvider config={config}>
     <QueryClientProvider client={queryClient}>
-      <RainbowKitProvider initialChain={296}>
+      <RainbowKitProvider>
         <TooltipProvider>
           <BrowserRouter>
             <Routes>

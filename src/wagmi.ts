@@ -1,8 +1,10 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { mainnet, polygon, optimism, arbitrum, base } from 'wagmi/chains';
+import { createConfig, Chain, http  } from 'wagmi';
+import { mainnet } from 'wagmi/chains';
+import { connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { metaMaskWallet } from '@rainbow-me/rainbowkit/wallets';
 
-
-export const hederaTestnet = {
+// Define Hedera Testnet as a custom chain
+export const hederaTestnet: Chain = {
   id: 296,
   name: 'Hedera Testnet',
   network: 'hedera-testnet',
@@ -30,10 +32,26 @@ export const hederaTestnet = {
   iconBackground: '#4A90E2',
 };
 
-export const config = getDefaultConfig({
-  appName: 'Red Token Invoice',
-  projectId: 'YOUR_PROJECT_ID',
-  // chains: [hederaTestnet, mainnet, polygon, optimism, arbitrum, base],
-  chains: [hederaTestnet],
-  ssr: false,
+// Supported chains
+const chains: Chain[] = [hederaTestnet];
+
+// Define connectors properly
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [metaMaskWallet],
+  },
+],   {
+  appName: 'My RainbowKit App',
+  projectId: '72c315afaa36aeb3e9d31839be8bd671',
+});
+
+// Create the WAGMI config
+export const config = createConfig({
+  connectors,
+  chains,
+  transports: {
+    [mainnet.id]: http('https://mainnet.example.com'),
+    [hederaTestnet.id]: http('https://testnet.hashio.io/api'),
+  }
 });
