@@ -84,13 +84,23 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+				'modal-appear': {
+					'0%': { opacity: '0', transform: 'translateY(-50%) scale(0.8)' },
+					'100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+				  },
+				  'modal-disappear': {
+					'0%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+					'100%': { opacity: '0', transform: 'translateY(-50%) scale(0.8)' },
+				  },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'modal-appear': 'modal-appear 2s ease forwards',
+				'modal-disappear': 'modal-disappear 3s ease forwards',
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [],
 } satisfies Config;

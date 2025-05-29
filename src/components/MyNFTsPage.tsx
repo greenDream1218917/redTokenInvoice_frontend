@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Image, ExternalLink, Heart, X } from "lucide-react";
+import LoadingOverlay from "@/components/ui/LoadingOverlay";
 
 const CONTRACT_ADDRESS = "0x0a35e0519be345d44feae9c34c8f8e36eabc1921";
 
@@ -67,8 +68,8 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
             description: metadata.description || "",
             image: metadata.image || "/placeholder.svg",
             collection: metadata.collection || "",
-            issuer: metadata.attributes.filter(attr => attr.trait_type === "issuer")[0]?.value || "Unknown",
-            amount: metadata.attributes.filter(attr => attr.trait_type === "amount")[0]?.value || "1",
+            issuer: metadata.attributes?.find((attr) => attr.trait_type === "issuer")?.value || "Unknown",
+            amount: metadata.attributes?.find((attr) => attr.trait_type === "amount")?.value || "1",
           });
         }
 
@@ -110,16 +111,16 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-white py-8">
+    <div className="min-h-screen bg-white py-8 relative">
+      {loading && <LoadingOverlay />}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">My NFTs</h1>
           <p className="text-gray-600">Manage and view your NFT collection</p>
         </div>
 
-        {loading ? (
-          <p className="text-center text-gray-600">Loading NFTs...</p>
-        ) : nfts.length === 0 ? (
+        {nfts.length === 0 ? (
           <Card className="col-span-full">
             <CardContent className="flex flex-col items-center justify-center py-16">
               <Image className="h-16 w-16 text-gray-400 mb-4" />
@@ -128,19 +129,13 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {nfts.map((nft, idx) => (
               <Card key={idx} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  {/* <img src={nft.image} alt={nft.name} className="w-full h-full object-cover" /> */}
-                  <iframe src={nft.image} title="PDF Viewer" className="w-full h-[70vh] border rounded"
-                />
+                  <iframe src={nft.image} title="PDF Viewer" className="w-full h-[70vh] border rounded" />
                   <div className="absolute top-2 right-2">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 bg-white/80 hover:bg-white/90"
-                    >
+                    <Button variant="ghost" size="icon" className="h-8 w-8 bg-white/80 hover:bg-white/90">
                       <Heart className="h-4 w-4" />
                     </Button>
                   </div>
@@ -167,20 +162,11 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
                   </div>
 
                   <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1"
-                      onClick={() => setViewingNFT(nft)}
-                    >
+                    <Button variant="outline" size="sm" className="flex-1" onClick={() => setViewingNFT(nft)}>
                       <ExternalLink className="h-4 w-4 mr-1" />
                       View
                     </Button>
-                    <Button
-                      variant="default"
-                      size="sm"
-                      className="flex-1 bg-red-600 hover:bg-red-700"
-                    >
+                    <Button variant="default" size="sm" className="flex-1 bg-red-600 hover:bg-red-700">
                       Sell
                     </Button>
                   </div>

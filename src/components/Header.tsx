@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
@@ -37,6 +36,7 @@ const Header = ({
               >
                 Mint
               </a>
+              
               <a
                 href="#"
                 onClick={(e) => {
