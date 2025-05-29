@@ -61,7 +61,7 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
           const tokenURI = await contract.tokenURI(tokenId);
           const response = await fetch(tokenURI);
           const metadata = await response.json();
-
+          alert(metadata.image);
           nftList.push({
             tokenId: tokenId.toString(),
             name: metadata.name || `NFT #${tokenId}`,
@@ -133,7 +133,7 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
             {nfts.map((nft, idx) => (
               <Card key={idx} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <iframe src={nft.image} title="PDF Viewer" className="w-full h-[70vh] border rounded" />
+                  <iframe src={nft.image} title="PDF Viewer" className="w-full h-full  border border-gray-500 rounded" />
                   <div className="absolute top-2 right-2">
                     <Button variant="ghost" size="icon" className="h-8 w-8 bg-white/80 hover:bg-white/90">
                       <Heart className="h-4 w-4" />
@@ -205,13 +205,13 @@ const MyNFTsPage = ({ isWalletConnected }: MyNFTsPageProps) => {
                 <iframe
                   src={viewingNFT.image}
                   title="PDF Viewer"
-                  className="w-full h-[70vh] border rounded"
+                  className="w-full h-full border rounded"
                 />
               ) : (
                 <img
                   src={viewingNFT.image}
                   alt={viewingNFT.name}
-                  className="max-w-full max-h-[70vh] object-contain rounded"
+                  className="max-w-full max-h-full object-contain rounded"
                 />
               )}
             </div>

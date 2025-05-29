@@ -33,6 +33,7 @@ export const hederaTestnet = {
 export const config = getDefaultConfig({
   appName: 'Red Token Invoice',
   projectId: 'YOUR_PROJECT_ID',
-  chains: [hederaTestnet, mainnet, polygon, optimism, arbitrum, base],
+  // chains: [hederaTestnet, mainnet, polygon, optimism, arbitrum, base],
+  chains: [hederaTestnet],
   ssr: false,
 });
